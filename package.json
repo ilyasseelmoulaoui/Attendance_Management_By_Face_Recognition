@@ -1,0 +1,7 @@
+{
+  "name": "Flask-Web-Framework-main",
+  "version": "1.0.0",
+  "dependencies": {
+    "axios": "^1.2.3"
+  }
+}

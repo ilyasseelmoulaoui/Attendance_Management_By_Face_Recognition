@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Home page{% endblock %}
+{% block content %}
+        <h2 class="text-danger cours-info" style="margin-bottom: 1%;margin-top: 1%">Liste de présence</h2>
+        <form action="/" class=" cours-info">
+        <input type="image" src="https://res.cloudinary.com/dtyee8jcd/image/upload/v1674404480/static/return-button-png-34590_relmxe.png" alt="Submit" width="36px" style="background-color: beige; border-radius: 10px" class="prv-btn" >
+{#        <img href="" width="36px" />#}
+        </form>
+        <p class="cours-info"><strong>Niveau : </strong>{{value[0].upper().split("_")[0]}}<strong style="margin-left: 15%">Groupe : </strong>{{value[0].upper().split("_")[1]}}</p>
+        <p class="cours-info">
+            <strong>Matière : </strong>{{value[3]}}
+            <strong style="margin-left: 15%">Date de séance : </strong>{{value[2]}}
+            <span style="margin-left:15%">
+                {% for v in value[4] %}
+        {#            {% if v!=None %}#}
+                        <img src="{{ v }}" width="40px" class="imgprv" >&nbsp;&nbsp;
+        {#            {% endif %}#}
+                {% endfor %}
+            </span>
+        </p>
+    {% if value[1]!={} %}
+{#        <p style="margin-left:15%">#}
+{#            {% for v in value[4] %}#}
+    {#            {% if v!=None %}#}
+{#                    <img src="{{ v }}" width="40px" class="imgprv" >&nbsp;&nbsp;#}
+    {#            {% endif %}#}
+{#            {% endfor %}#}
+{#        </p>#}
+        <br>
+        <table class="table my-table text-center" style="background-color: #dae0e5;flex: 2">
+        <thead>
+            <tr class="bg-dark" style="color: aliceblue">
+                <th >Matricule</th>
+                <th>Nom complet</th>
+                <th>Présence</th>
+                <th>Taux</th>
+                <th>Image</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+         {% for v in (value[1]).keys() %}
+            <tr>
+                <td>{{ value[1][v][4][0] }}</td>
+                <td>{{ value[1][v][4][1] }}</td>
+                {% if value[1][v][0]==0 %}
+                    <td class="text-danger">Non</td>
+                {% else %}
+                    <td class="text-success">Oui</td>
+                {% endif %}
+                {% if value[1][v][1] != None %}
+                    <td>{{ value[1][v][1] }}%</td>
+                {% else %}
+                    <td>-</td>
+                {% endif %}
+                    <td>
+                        {% if value[1][v][2] != None %}
+                            <img class="imgprv" src="{{ value[1][v][2] }}" width="40px" />
+                        {% else %}
+                            <img src="https://res.cloudinary.com/dtyee8jcd/image/upload/v1673197740/static/logo_hhdbfs.png" width="40px" />
+                        {% endif %}
+                    </td>
+                {% if value[1][v][0]==0 %}
+                    <td>
+                        <a class="btn btn-success" style="float: right;margin-bottom: 1%" href="{{ url_for('valider_presence', id=value[1][v][3],grp=value[0],cours=value[3],date=value[2]) }}" >Mettre en présence</a>
+                    </td>
+                {% else %}
+                    <td>
+                        <a class="btn btn-danger" style="float: right;margin-bottom: 1%"  href="{{ url_for('valider_absence', id=value[1][v][3],grp=value[0],cours=value[3],date=value[2]) }}" >Mettre en absence</a>
+                    </td>
+                {% endif %}
+            </tr>
+         {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div><strong class="text-danger cours-info">Aucune séance n'est disponible pour les informations selectionnées</strong></div>
+    {% endif %}
+{% endblock %}

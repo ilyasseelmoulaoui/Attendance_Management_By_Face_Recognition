@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Load</title>
+</head>
+<body>
+    <h2>Upload image</h2>
+    {% load cloudinary %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.image }}
+            <br>
+            <br>
+            <div>
+                <input type="submit" value="Upload image">
+            </div>
+        </form>
+</body>
+</html>

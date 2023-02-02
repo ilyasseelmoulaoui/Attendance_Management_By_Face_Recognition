@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %}Home page{% endblock %}
+{% block content %}
+<section class="ftco-section">
+    <span style="background-color: #ffc107;">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center mb-5">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="wrapper" style="width:40%">
+            <div class="contact-wrap w-100 p-md-5 p-4 py-5">
+              <h4 class="mb-4" style="color:whitesmoke">Effectuer votre recherche</h4>
+            {% if value[2]=="Aucune séance n'est disponible pour les informations selectionnées" %}
+                <div class="form-z-index" id="boite">
+                    <div>Aucune séance n'est disponible pour les informations selectionnées</div>
+                    <br>
+                    <button onclick="fermerLaBoite()" style="background-color:#d39e00">Fermer</button>
+                </div>
+            {% endif %}
+              <form method="POST" id="contactForm" name="contactForm" class="contactForm" action="/result">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <select class="form-control" name="grp" required >
+                            <option value="" style="text-align: center" >-- Choisir un groupe --</option>
+                            {% for group in value[0].keys() %}
+                                <option value="{{ group }}" style="background-color: #1b1e21" >{{ value[0][group].replace("_", " ").upper() }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <select class="form-control" name="cours" required>
+                            <option value="" style="text-align: center">-- Choisir une matière --</option>
+                            {% for m in value[1] %}
+                                <option value="{{ m }}" style="background-color: #1b1e21" >{{ m }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="date" name="date" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <input type="submit" value="Rechercher" class="btn btn-primary">
+                      <div class="submitting"></div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
+</section>
+{% endblock %}
