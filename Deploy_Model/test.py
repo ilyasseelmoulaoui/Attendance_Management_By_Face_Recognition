@@ -9,9 +9,9 @@ from datetime import datetime
 
 ########### la configuration du service cloud "cloudinary", ici, vous devez ajouter les informations de votre propre compte
 cloudinary.config(
-    cloud_name="dtyee8jcd",
-    api_key="529433829634675",
-    api_secret="ZuH4Y2_xoc1Yh_AIzlUN-qDI8ew",
+    cloud_name="Nom_Cloud",
+    api_key="Cle_API",
+    api_secret="Secret_Cle",
     secure=True
 )
 ########### End de la configuration du service cloud "cloudinary"
